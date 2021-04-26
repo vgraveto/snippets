@@ -1,7 +1,7 @@
 # snippets
 Template Web site and REST API to manage snippets and users.
 
-Folder **cmd/api** includes de *REST API* and folder *cmd/wec* has teh web site that uses the *API* to get to the *MySQL* database.
+Folder **cmd/api** includes de *REST API* and folder **cmd/web** has teh web site that uses the *API* to get to the *MySQL* database.
 
 In folder **pkg** you will find the common data packages used by both, like data models. The **ui** folder incudes the *html* templates and all the needed static files.
 

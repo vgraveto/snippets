@@ -1,0 +1,565 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  ChangeUserPassword:
+    description: ChangeUserPassword defines the structure for change of an user password
+    properties:
+      newPassword:
+        description: the new password for this user
+        maxLength: 60
+        minLength: 10
+        type: string
+        x-go-name: NewPassword
+      oldPassword:
+        description: the old password for this user
+        maxLength: 60
+        minLength: 10
+        type: string
+        x-go-name: OldPassword
+    required:
+    - oldPassword
+    - newPassword
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  CreateUser:
+    description: CreateUser defines the structure for creating an user
+    properties:
+      email:
+        description: the username for this user
+        maxLength: 255
+        type: string
+        x-go-name: Email
+      name:
+        description: the name for this user
+        maxLength: 255
+        minLength: 10
+        type: string
+        x-go-name: Name
+      password:
+        description: the username for this user
+        maxLength: 60
+        minLength: 10
+        type: string
+        x-go-name: Password
+      roles:
+        description: the int slice of role ID's for this user
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Roles
+    required:
+    - name
+    - email
+    - password
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  GenericMessage:
+    description: GenericMessage is a generic message returned by a server
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  LoginUser:
+    description: LoginUser defines the structure for login of an user
+    properties:
+      password:
+        description: the username for this user
+        maxLength: 60
+        minLength: 10
+        type: string
+        x-go-name: Password
+      username:
+        description: the username for this user
+        maxLength: 255
+        type: string
+        x-go-name: Username
+    required:
+    - username
+    - password
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  RoleType:
+    description: RoleType defines the structure for role types of an user in the API
+    properties:
+      created:
+        description: the created dateTime for this role type
+        format: date-time
+        type: string
+        x-go-name: Created
+      description:
+        description: the role description
+        maxLength: 45
+        type: string
+        x-go-name: Description
+      id:
+        description: the id for the role type
+        format: int64
+        minimum: 1
+        type: integer
+        x-go-name: ID
+      role:
+        description: the role name
+        maxLength: 45
+        type: string
+        x-go-name: Role
+    required:
+    - role
+    - description
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  Snippet:
+    description: Snippet defines the structure for an API snippet
+    properties:
+      content:
+        description: the content for this snippet
+        maxLength: 1000
+        type: string
+        x-go-name: Content
+      created:
+        description: the created dateTime for this snippet
+        format: date-time
+        type: string
+        x-go-name: Created
+      expires:
+        description: the expiration dateTime for this snippet
+        format: date-time
+        type: string
+        x-go-name: Expires
+      id:
+        description: the id for the snippet
+        format: int64
+        minimum: 1
+        type: integer
+        x-go-name: ID
+      title:
+        description: the title for this snippet
+        maxLength: 100
+        type: string
+        x-go-name: Title
+    required:
+    - title
+    - content
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  SnippetCreate:
+    description: SnippetCreate defines the structure for snippet creation
+    properties:
+      content:
+        description: the content for this snippet
+        maxLength: 1000
+        type: string
+        x-go-name: Content
+      expires:
+        description: the expiration number of days for this snippet (valid values
+          365, 7 or 1 days)
+        type: string
+        x-go-name: Expires
+      title:
+        description: the title for this snippet
+        maxLength: 100
+        type: string
+        x-go-name: Title
+    required:
+    - title
+    - content
+    - expires
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  TokenMessage:
+    properties:
+      token:
+        type: string
+        x-go-name: Token
+      user:
+        $ref: '#/definitions/TokenUser'
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  TokenUser:
+    description: Define the token user structure
+    properties:
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      roles:
+        items:
+          type: string
+        type: array
+        x-go-name: Roles
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  User:
+    description: User defines the structure for an API user
+    properties:
+      active:
+        description: the active state of this user
+        type: boolean
+        x-go-name: Active
+      created:
+        description: the created dateTime for this user
+        format: date-time
+        type: string
+        x-go-name: Created
+      email:
+        description: the email for this user
+        maxLength: 255
+        type: string
+        x-go-name: Email
+      id:
+        description: the id for the user
+        format: int64
+        minimum: 1
+        type: integer
+        x-go-name: ID
+      name:
+        description: the name for this user
+        maxLength: 255
+        type: string
+        x-go-name: Name
+      roles:
+        description: the authorization roles for this user
+        items:
+          type: string
+        type: array
+        x-go-name: Roles
+    required:
+    - name
+    - email
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  UserRoleDetail:
+    description: UserRoleDetail defines the structure for roles of an user
+    properties:
+      created:
+        description: the created dateTime for this role detail
+        format: date-time
+        type: string
+        x-go-name: Created
+      id:
+        description: the id for the role detail
+        format: int64
+        minimum: 1
+        type: integer
+        x-go-name: ID
+      idrole:
+        description: the if of the role specified role for this user
+        maxLength: 45
+        type: string
+        x-go-name: IDRole
+      iduser:
+        description: the id of the user assigned for this role detail
+        format: int64
+        minimum: 1
+        type: integer
+        x-go-name: IDUser
+    required:
+    - idrole
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+  ValidationMessagesError:
+    description: ValidationError is a collection of validation error messages
+    properties:
+      messages:
+        items:
+          type: string
+        type: array
+        x-go-name: Messages
+    type: object
+    x-go-package: github.com/vgraveto/snippets/pkg/models
+info:
+  contact:
+    email: vitor@wexcedo.com
+    name: Vitor Graveto
+  description: Documentation for Snippets API used for database manipulation
+  title: Snippets API
+  version: 0.0.4
+paths:
+  /:
+    get:
+      operationId: home
+      produces:
+      - text/plain
+      responses:
+        "200":
+          $ref: '#/responses/stringResponse'
+      summary: Return the string "Snippets API"
+      tags:
+      - global
+  /ping:
+    get:
+      operationId: pingAPI
+      responses:
+        "200":
+          $ref: '#/responses/messageResponse'
+      summary: Return the JSON message with string "OK"
+      tags:
+      - global
+  /snippets:
+    get:
+      description: Return a list of snippets from the database
+      operationId: listSnippets
+      responses:
+        "200":
+          $ref: '#/responses/snippetsResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      tags:
+      - snippets
+    post:
+      description: Create a new snippet
+      operationId: createSnippet
+      parameters:
+      - description: Data structure to create a new snippet
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/SnippetCreate'
+      responses:
+        "200":
+          $ref: '#/responses/snippetResponse'
+        "400":
+          $ref: '#/responses/messageResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "422":
+          $ref: '#/responses/validationResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - snippets
+  /snippets/{id}:
+    get:
+      description: Return a single snippet from the database
+      operationId: listSingleSnippet
+      parameters:
+      - description: The ID for which the operation relates
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "200":
+          $ref: '#/responses/snippetResponse'
+        "400":
+          $ref: '#/responses/messageResponse'
+        "404":
+          $ref: '#/responses/messageResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      tags:
+      - snippets
+  /users:
+    get:
+      description: Return a list of users from the database
+      operationId: listUsers
+      responses:
+        "200":
+          $ref: '#/responses/usersResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - users
+    post:
+      description: Create and inserts a new user on the database
+      operationId: createUser
+      parameters:
+      - description: Data structure to create an user.
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateUser'
+      responses:
+        "200":
+          $ref: '#/responses/messageResponse'
+        "400":
+          $ref: '#/responses/messageResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "422":
+          $ref: '#/responses/validationResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - users
+  /users/{id}:
+    get:
+      description: Return a single user from the database
+      operationId: listSingleUser
+      parameters:
+      - description: The ID for which the operation relates
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "200":
+          $ref: '#/responses/userResponse'
+        "400":
+          $ref: '#/responses/messageResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "404":
+          $ref: '#/responses/messageResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - users
+  /users/{id}/change-password:
+    put:
+      description: Change password for user {id} on the database
+      operationId: changeUserPassword
+      parameters:
+      - description: The ID of the user to which the operation relates
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      - description: Data structure to change the user password
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeUserPassword'
+      responses:
+        "200":
+          $ref: '#/responses/messageResponse'
+        "400":
+          $ref: '#/responses/messageResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "422":
+          $ref: '#/responses/validationResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - users
+  /users/login:
+    post:
+      description: Validate user credentials and return JWT when valid
+      operationId: loginUser
+      parameters:
+      - description: Data structure to login with user credentials.
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/LoginUser'
+      responses:
+        "200":
+          $ref: '#/responses/userTokenResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "422":
+          $ref: '#/responses/validationResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      tags:
+      - users
+  /users/role-types:
+    get:
+      description: Return a list of valid user role types from the database
+      operationId: listRoles
+      responses:
+        "200":
+          $ref: '#/responses/rolesResponse'
+        "401":
+          $ref: '#/responses/messageResponse'
+        "403":
+          $ref: '#/responses/messageResponse'
+        "500":
+          $ref: '#/responses/messageResponse'
+      security:
+      - snippetskey: []
+      tags:
+      - users
+produces:
+- application/json
+responses:
+  messageResponse:
+    description: Generic message returned as a JSON string
+    schema:
+      $ref: '#/definitions/GenericMessage'
+  noContentResponse:
+    description: No content is returned by this API endpoint
+  rolesResponse:
+    description: A list of role types
+    schema:
+      items:
+        $ref: '#/definitions/RoleType'
+      type: array
+  snippetResponse:
+    description: Data structure representing a single snippet
+    schema:
+      $ref: '#/definitions/Snippet'
+  snippetsResponse:
+    description: A list of Snippets
+    schema:
+      items:
+        $ref: '#/definitions/Snippet'
+      type: array
+  stringResponse:
+    description: Text returned as a string
+  userResponse:
+    description: Data structure representing a single user
+    schema:
+      $ref: '#/definitions/User'
+  userTokenResponse:
+    description: Data structure representing the user token record
+    schema:
+      $ref: '#/definitions/TokenMessage'
+  usersResponse:
+    description: A list of users
+    schema:
+      items:
+        $ref: '#/definitions/User'
+      type: array
+  validationResponse:
+    description: Validation errors defined as an array of strings
+    schema:
+      $ref: '#/definitions/ValidationMessagesError'
+schemes:
+- https
+securityDefinitions:
+  snippetskey:
+    description: JSON Web Token (JWT) - token
+    in: header
+    name: Authentication
+    type: apiKey
+swagger: "2.0"

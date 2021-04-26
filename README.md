@@ -1,2 +1,2 @@
 # snippets
-Template Web sit and REST API to manage snippets and users
+Template Web site and REST API to manage snippets and users

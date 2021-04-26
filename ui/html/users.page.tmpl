@@ -1,0 +1,28 @@
+{{template "base" .}}
+{{define "title"}}Users List{{end}}
+{{define "main"}}
+<h2>List of Users</h2>
+{{$userID := .ID}}
+{{if .Users}}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Created</th>
+        <th>ID</th>
+    </tr>
+    {{range .Users}}
+    <tr>
+        {{if eq $userID .ID}}
+        <td>Myself: <a href='/user/profile'>{{.Name}}</a></td>
+        {{else}}
+        <td><a href='/user/{{.ID}}'>{{.Name}}</a></td>
+        {{end}}
+        <td>{{humanDate .Created}}</td>
+        <td>#{{.ID}}</td>
+    </tr>
+    {{end}}
+</table>
+{{else}}
+<p>There's nothing to see here... yet!</p>
+{{end}}
+{{end}}

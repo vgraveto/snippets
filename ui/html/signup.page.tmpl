@@ -1,0 +1,45 @@
+{{template "base" .}}
+
+{{define "title"}}Signup{{end}}
+
+{{define "main"}}
+<form action='/user/signup' method='POST' novalidate>
+    <input name='csrf_token' type='hidden' value='{{.CSRFToken}}'>
+    {{$roles := .Roles}}
+    {{with .Form}}
+    <div>
+        <label>Name:</label>
+        {{with .Errors.Get "name"}}
+        <label class='error'>{{.}}</label>
+        {{end}}
+        <input name='name' type='text' value='{{.Get "name"}}'>
+    </div>
+    <div>
+        <label>Email:</label>
+        {{with .Errors.Get "email"}}
+        <label class='error'>{{.}}</label>
+        {{end}}
+        <input name='email' type='email' value='{{.Get "email"}}'>
+    </div>
+    <div>
+        <label>Password:</label>
+        {{with .Errors.Get "password"}}
+        <label class='error'>{{.}}</label>
+        {{end}}
+        <input name='password' type='password'>
+    </div>
+    <div>
+        <label>User Roles:</label>
+        {{with .Errors.Get "roles"}}
+        <label class='error'>{{.}}</label>
+        {{end}}
+        {{range $roles}}
+        <input name='roles' type='checkbox' value={{.ID}}> {{.Role}}
+        {{end}}
+    </div>
+    <div>
+        <input type='submit' value='Signup'>
+    </div>
+    {{end}}
+</form>
+{{end}}

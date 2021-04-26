@@ -1,0 +1,31 @@
+# Configuration file for SnippetsAPI program
+[global]
+httpPort = "9090"
+
+[token]
+issuerName = "snippetsAPI Development"
+# validTime is the number of hours for token valid time
+validTime = 12
+signingKey = "snippets.Dev,123"
+
+[api]
+# timeouts are specified in seconds
+httoIdleTimeout = 60
+httpGeadTimeout = 5
+httoWriteTimeout = 10
+
+deadlineWaitForClose = 15    # seconds
+sessionLifetime = 12    # hours
+dbConnMaxLifetime = 15    # seconds
+
+
+[dbase]
+protocol = "tcp"
+server = "mydb.url.com:25060"
+database = "snippetbox"
+username = "snippetsuser"
+password = "abc.123.Def"
+serverCA = "ca-certificate.crt"
+clientCert = ""
+clientKey = ""
+

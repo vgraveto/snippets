@@ -1,0 +1,15 @@
+# Configuration file for SnippetsWeb program
+[global]
+httpPort = "5000"
+
+[api]
+# timeouts are specified in seconds
+httoIdleTimeout = 60
+httpGeadTimeout = 5
+httoWriteTimeout = 10
+deadlineWaitForClose = 15    # seconds
+sessionLifetime = 12    # hours
+
+[dbase]
+# the URL where de api that connects to database is deployed
+url = "http://localhost:9090"
